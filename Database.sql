@@ -180,7 +180,10 @@ INSERT INTO `sa_conf` (`conf_id`, `conf_key`, `conf_value`, `conf_desc`, `conf_i
 (57, 'api_url', '', 'API地址', 0, 0, 0, 0),
 (58, 'tencent_ai_appid', '2160961838', '腾讯AI的APPID', 0, 0, 0, 1598539052),
 (59, 'tencent_ai_appkey', '4S0vErEgprAN2h2b', '腾讯AI的APPKEY', 0, 0, 0, 1598539052),
-(60, 'static_url', '', 'Static文件地址', 0, 0, 0, 0);
+(60, 'static_url', '', 'Static文件地址', 0, 0, 0, 0),
+(61, '163_api', '', '网易云API地址', 0, 0, 0, 0)
+(62, '163_username', '', '网易云音乐登陆账号', 0, 0, 0, 0)
+(63, '163_password', '', '网易云登录密码（32位MD5加密小写）', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
