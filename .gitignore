@@ -1,0 +1,14 @@
+/.idea
+/.vscode
+/vendor
+/public/install
+/public/music
+/public/weapp_code
+*.log
+.env
+composer.lock
+.DS_Store
+/app/api/controller/Test.php
+/app/command/Test.php
+/app/api/view/test
+/node_modules
