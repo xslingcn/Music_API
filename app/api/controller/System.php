@@ -16,7 +16,15 @@ class System extends BaseController
     public function login()
     {
         $cookie = getCookie(config('startadmin.163_api')  . '/login/cellphone?phone=' . config('startadmin.163_username') . '&md5_password=' . config('startadmin.163_password'));
-        $cache_cookie = json_encode($cookie);
+        $cookie_keys = array_keys($cookie);
+        $cache_cookie = '';
+
+        for ($i = 0; $i <= count($cookie) - 1; $i++) {
+            $cache_cookie .= $cookie_keys[$i] . '=' . $cookie[$cookie_keys[$i]];
+            if ($i != count($cookie) - 1) {
+                $cache_cookie .= ';';
+            }
+        }
         cache('cookie', $cache_cookie, 86400);
 
         if ($cookie['__remember_me'] == 'true') {
