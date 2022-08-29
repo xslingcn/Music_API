@@ -71,9 +71,9 @@ function jok($msg = 'success', $data = null)
 {
     header("content-type:application/json;chartset=uft-8");
     if ($data !== null) {
-        echo json_encode(["code" => 200, "msg" => $msg, 'data' => $data]);
+        echo json_encode(["code" => 200, "msg" => $msg, 'data' => $data], JSON_UNESCAPED_UNICODE);
     } else {
-        echo json_encode(["code" => 200, "msg" => $msg]);
+        echo json_encode(["code" => 200, "msg" => $msg], JSON_UNESCAPED_UNICODE);
     }
     die;
 }
@@ -87,7 +87,7 @@ function jok($msg = 'success', $data = null)
 function jerr($msg = 'error', $code = 500)
 {
     header("content-type:application/json;chartset=uft-8");
-    echo json_encode(["code" => $code, "msg" => $msg]);
+    echo json_encode(["code" => $code, "msg" => $msg], JSON_UNESCAPED_UNICODE);
     die;
 }
 /**
@@ -597,12 +597,17 @@ function getUuid()
  * @param  string   $url_  Request URL
  * @return array   $cookies The Array of Cookies
  */
-function getCookie($url_)
+function getCookie($url_, $cookie="", $header=[])
 {
     $ch = curl_init($url_);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_COOKIE, $cookie);
     curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
     $result = curl_exec($ch);
+//    $result = curlHelper($url_, 'GET',null, $header,$cookie);
     preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $result, $matches);
     $cookies = array();
     foreach ($matches[1] as $item) {
